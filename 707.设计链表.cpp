@@ -12,7 +12,7 @@ public://类外构造函数了也能用
         int val;
         ListNode* next;
         ListNode(int val):val(val),next(nullptr) {}//构造函数没有返回体。
-    }
+    };
 
     MyLinkedList() {//构造函数
         this->dhead = new ListNode(0);
@@ -39,7 +39,8 @@ public://类外构造函数了也能用
     }
 
     void addAtIndex(int index,int val) {
-        //后补充的。
+        //后补充的。index范围[0,size-1]，故size可以插入
+        if (index<0) index=0;//插到头去
         if (index>size) return;//根据题意，不会插入到链表中
         //添加操作。先创建一个新结点
         ListNode* node = new ListNode(val);
@@ -52,7 +53,31 @@ public://类外构造函数了也能用
         p->next=node;
         this->size++;
     }
+//查
+    int get(int index) {
+        //防越界（题中说index范围[0,size-1]）
+        if (index>size-1 || index<0) return -1;
+        ListNode* p=dhead;//遍历
+        while (index--) {
+            p=p->next;
+        }//找到的是目标节点的前驱节点。
+        return p->next->val;
 
+    }
+//删
+    void deleteAtIndex(int index) {
+        //范围同理。
+        if (index<0 || index>size-1) return ;
+        ListNode* p=dhead;
+        while (index--) {
+            p=p->next;
+        }
+        //删除操作有三句
+        ListNode* tmp=p->next;
+        p->next = p->next->next;
+        delete tmp;
+        this->size--;
+    }
 
 
 
