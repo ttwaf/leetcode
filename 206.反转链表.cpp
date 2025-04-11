@@ -15,26 +15,32 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
-class Solution {//二刷，递归写法
+class Solution {
 public:
 
-    ListNode* reverse(ListNode* pre,ListNode* cur) {
-        if (cur==nullptr) return pre;//cur到空，pre到尾，返回头结点。
-
-        ListNode* tmp=cur->next;
-        cur->next=pre;
-        return reverse(cur,tmp);//相当于快慢指针前移的操作。
-        //即相当于
-        // pre=cur;//慢指针前进
-        // cur=tmp;//快指针前进
-    }
-
     ListNode* reverseList(ListNode* head) {
-        return reverse(nullptr,head);//相当于传入pre,cur
     }
 };
 // @lc code=end
 
+class Solution {//二刷，递归写法
+    public:
+    
+        ListNode* reverse(ListNode* pre,ListNode* cur) {
+            if (cur==nullptr) return pre;//cur到空，pre到尾，返回头结点。
+    
+            ListNode* tmp=cur->next;
+            cur->next=pre;
+            return reverse(cur,tmp);//相当于快慢指针前移的操作。
+            //即相当于
+            // pre=cur;//慢指针前进
+            // cur=tmp;//快指针前进
+        }
+    
+        ListNode* reverseList(ListNode* head) {
+            return reverse(nullptr,head);//相当于传入pre,cur
+        }
+    };
 
 class Solution {//二刷，双指针写法
     public:
